@@ -1,11 +1,27 @@
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import AppNavigator from './src/navigation/AppNavigator';
+import { UserProvider } from './src/utils/UserContext';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { LogBox, Platform, UIManager } from 'react-native';
+
+// 跳过烦人的警告
+LogBox.ignoreLogs(['Require cycle:', 'ViewPropTypes']);
+
+// 启用安卓的布局动画
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <StatusBar style="light" />
+      <UserProvider>
+        <AppNavigator />
+      </UserProvider>
     </View>
   );
 }
@@ -13,8 +29,6 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#000',
   },
 });
