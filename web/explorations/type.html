@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#2146ff">
+  <title>ZVEN — 字体空间</title>
+  <style>
+    :root{--blue:#2146ff;--paper:#f0efdd;--ink:#11130f;--acid:#dcff00;--ease:cubic-bezier(.2,.7,.1,1)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--blue);color:var(--paper);font-family:Arial,"PingFang SC","Microsoft Yahei",sans-serif;-webkit-font-smoothing:antialiased}button,a{-webkit-tap-highlight-color:transparent}button{font:inherit;cursor:pointer}button:focus-visible,a:focus-visible{outline:3px solid var(--acid);outline-offset:5px}button{color:inherit}::selection{background:var(--acid);color:var(--ink)}
+    .skip{position:fixed;top:12px;left:12px;z-index:20;padding:12px;background:var(--ink);color:var(--paper);transform:translateY(-160%)}.skip:focus{transform:translateY(0)}
+    .stage{position:relative;min-height:100svh;overflow:hidden;display:flex;flex-direction:column;isolation:isolate;background:var(--blue)}
+    .stage::before{position:absolute;content:"";inset:0;z-index:-1;pointer-events:none;opacity:.15;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.92' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.45' filter='url(%23n)'/%3E%3C/svg%3E")}
+    .top{height:95px;padding:27px 42px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;position:relative;z-index:3}.signature{font-size:18px;letter-spacing:-1px;font-weight:800;line-height:1}.signature small{display:block;letter-spacing:2px;font-size:9px;font-weight:400;margin-top:10px}.edition{display:flex;gap:80px;font-family:monospace;font-size:11px;line-height:1.65;letter-spacing:.08em}.edition span:last-child{text-align:right}
+    .letter-space{position:relative;min-height:300px;flex:1;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-top:-25px;user-select:none}.word{font-size:38.4vw;line-height:.78;font-weight:900;letter-spacing:-.094em;padding-right:.094em;transform:scaleY(1.2);white-space:nowrap;font-family:"Arial Black",Arial,sans-serif;position:relative;left:-.008em;transition:letter-spacing 1.2s var(--ease)}.letter-space:hover .word{letter-spacing:-.075em}
+    .scan{position:absolute;height:8.5%;top:45%;left:-4%;width:108%;background:var(--blue);mix-blend-mode:multiply;transform:skewY(-7deg);pointer-events:none;animation:scan 13s ease-in-out infinite}.cut{position:absolute;left:63.5%;top:0;width:1px;height:100%;background:var(--blue);pointer-events:none}.cut::after{content:"";position:absolute;left:-8px;top:18%;height:84px;width:16px;background:var(--acid);transform:skewY(-7deg)}
+    .subline{padding:31px 42px 38px;display:flex;align-items:flex-end;justify-content:space-between;position:relative;z-index:2}.statement{margin:0;font-size:clamp(24px,3.2vw,49px);font-weight:400;line-height:1.15;letter-spacing:-.045em}.statement span{color:var(--acid)}.index-note{display:flex;align-items:center;gap:27px;font-size:12px;letter-spacing:.1em}.index-note i{font-style:normal;font-size:29px;font-weight:300;line-height:1}
+    .dimensions{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:1px solid rgba(240,239,221,.5);position:relative;z-index:3;background:var(--blue)}.dimension{appearance:none;border:0;border-right:1px solid rgba(240,239,221,.32);text-align:left;background:transparent;min-height:122px;padding:19px 25px 23px;display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:22px;transition:background .3s,color .3s}.dimension:last-child{border-right:0}.dimension:hover,.dimension[aria-pressed="true"]{background:var(--acid);color:var(--ink)}.dimension .num{font-family:monospace;font-size:11px}.dimension .name{font-size:clamp(14px,1.35vw,21px);font-weight:500;letter-spacing:-.015em}.dimension .num::after{content:"↗";margin-left:10px;opacity:0;transition:opacity .3s}.dimension:hover .num::after,.dimension[aria-pressed="true"] .num::after{opacity:1}
+    .reader{min-height:100svh;background:var(--ink);color:var(--paper);position:relative;display:none;overflow:hidden;isolation:isolate}.reader.open{display:block}.reader:focus{outline:0}.reader-header{display:flex;justify-content:space-between;align-items:center;padding:29px 42px;border-bottom:1px solid #f0efdd38;position:relative;z-index:2}.reading-index{font-family:monospace;font-size:11px;letter-spacing:.13em}.back{background:transparent;border:0;padding:8px 0;font-size:12px;display:flex;align-items:center;gap:12px}.back:hover{color:var(--acid)}.back:before{content:"↑";font-size:20px}.reading-layout{display:grid;grid-template-columns:.95fr 1.05fr;min-height:calc(100svh - 91px)}.dimension-display{position:relative;padding:47px 0 50px 39px;overflow:hidden;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid #f0efdd38}.dimension-title{margin:0;line-height:.95;letter-spacing:-.085em;font-size:clamp(100px,12.5vw,210px);font-weight:600;color:var(--blue);max-height:550px;align-self:flex-start;transition:opacity .25s}.dimension-title span{display:block}.dim-english{font-size:13px;letter-spacing:.12em;text-transform:uppercase;padding-top:35px;color:#adad9d}.slice{height:34px;width:150%;background:var(--acid);position:absolute;left:-5%;top:46%;transform:rotate(-9deg);mix-blend-mode:screen;pointer-events:none}.article{padding:68px 9vw 55px 6.5vw;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;position:relative;z-index:1}.record-meta{font-family:monospace;font-size:11px;color:#acaf9c;display:flex;flex-wrap:wrap;gap:10px 22px;letter-spacing:.05em}.article h2{font-size:clamp(34px,3.1vw,50px);font-weight:400;line-height:1.35;letter-spacing:-.045em;margin:48px 0 35px}.article h2 span{display:block}.article p{font-size:17px;line-height:2;color:#c9cbb9;max-width:34em;margin:0}.article footer{margin-top:70px;padding-top:19px;border-top:1px solid #f0efdd38;width:100%;display:flex;justify-content:space-between;align-items:center;font-size:11px;letter-spacing:.08em;color:#acaf9c}.next{border:0;background:transparent;color:var(--acid);font-size:12px;padding:8px 0}.next:hover{color:var(--paper)}
+    @keyframes scan{0%,100%{top:25%}50%{top:72%}}
+    @media(min-width:1800px){.letter-space{max-height:780px}.stage{justify-content:space-between}}
+    @media(max-width:700px){.top{padding:24px 22px;height:105px}.signature{font-size:16px}.edition{gap:15px;font-size:9px}.edition span:first-child{display:none}.letter-space{min-height:300px;margin-top:-5px;overflow:visible;align-items:center}.word{font-size:43.5vw;letter-spacing:-.11em;padding-right:.11em;transform:scaleY(1.8);left:-.03em}.letter-space:hover .word{letter-spacing:-.11em}.scan{left:-6%;width:112%;height:8%;transform:skewY(-13deg)}.cut{left:69%}.cut::after{height:55px;width:9px;left:-4px;top:20%}.subline{padding:20px 22px 27px;gap:15px}.statement{font-size:27px}.index-note{font-size:10px;gap:14px;letter-spacing:.04em}.index-note i{font-size:22px}.dimensions{grid-template-columns:repeat(3,minmax(0,1fr))}.dimension{min-height:88px;padding:14px 20px;gap:15px;border-bottom:1px solid rgba(240,239,221,.32)}.dimension:nth-child(3){border-right:0}.dimension:nth-child(n+4){border-bottom:0}.dimension .name{font-size:14px}.dimension .num{font-size:9px}.reader-header{padding:20px 22px}.reading-layout{display:block}.dimension-display{padding:25px 22px;border-right:0;border-bottom:1px solid #f0efdd38;height:205px}.dimension-title{font-size:72px;line-height:1.25;letter-spacing:-.085em;white-space:nowrap}.dimension-title span{display:inline}.dim-english{font-size:10px;padding-top:18px}.slice{height:12px;top:48%;left:-25%;width:150%;transform:rotate(-7deg)}.article{padding:40px 28px 45px}.record-meta{font-size:10px;gap:20px}.article h2{font-size:31px;margin:30px 0 24px}.article p{font-size:15px;line-height:2}.article footer{margin-top:40px;font-size:9px}.next{font-size:11px}.reading-index{font-size:10px}}
+    @media(max-height:660px) and (min-width:701px){.top{height:70px;padding-top:21px}.letter-space{min-height:200px}.word{font-size:34vw}.subline{padding-top:10px;padding-bottom:25px}.dimension{min-height:95px;padding-top:15px;padding-bottom:17px;gap:15px}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}}
+  </style>
+</head>
+<body>
+  <a class="skip" href="#dimensions">跳到六维索引</a>
+  <main>
+    <section class="stage" aria-label="Zven 个人档案">
+      <header class="top"><div class="signature">ZVEN<small>个人档案</small></div><div class="edition"><span>ONE LIFE.<br>STILL UNFINISHED.</span><span>2026 —<br>持续书写</span></div></header>
+      <div class="letter-space" aria-hidden="true"><div class="word">ZVEN</div><div class="scan"></div><div class="cut"></div></div>
+      <div class="subline"><h1 class="statement">仍在<span>形成。</span></h1><div class="index-note"><span>从一个维度进入</span><i aria-hidden="true">↓</i></div></div>
+      <nav id="dimensions" class="dimensions" aria-label="六维索引">
+        <button class="dimension" data-index="0" aria-pressed="false"><span class="num">01</span><span class="name">认知判断</span></button>
+        <button class="dimension" data-index="1" aria-pressed="false"><span class="num">02</span><span class="name">作品项目</span></button>
+        <button class="dimension" data-index="2" aria-pressed="false"><span class="num">03</span><span class="name">技艺方法</span></button>
+        <button class="dimension" data-index="3" aria-pressed="false"><span class="num">04</span><span class="name">关系接触面</span></button>
+        <button class="dimension" data-index="4" aria-pressed="false"><span class="num">05</span><span class="name">时代索引</span></button>
+        <button class="dimension" data-index="5" aria-pressed="false"><span class="num">06</span><span class="name">意义取向</span></button>
+      </nav>
+    </section>
+    <section class="reader" id="reader" tabindex="-1" aria-labelledby="record-title">
+      <header class="reader-header"><span class="reading-index" id="reading-index">01 / 06　COGNITION</span><button class="back" id="back">回到索引</button></header>
+      <div class="reading-layout">
+        <div class="dimension-display" aria-hidden="true"><h2 class="dimension-title" id="dimension-title"><span>认知</span><span>判断</span></h2><span class="slice"></span><div class="dim-english" id="dim-english">Cognition / judgment</div></div>
+        <article class="article">
+          <div class="record-meta"><span>现场</span><span>示例材料</span><span>事件 <time datetime="2026-09-18">2026-09-18</time></span><span>档案 <time datetime="2026-09-28">2026-09-28</time></span></div>
+          <h2 id="record-title"><span>先留下依据，</span><span>再写结论。</span></h2>
+          <p>Zven 给示例项目的一次取舍留下两段材料：一段支持继续，一段支持暂停。结论仍是继续；与上一版相比，多出的是可以重新检查的理由。</p>
+          <footer><span>同一段经历 · 六个阅读方向</span><button class="next" id="next">下一维度 ↗</button></footer>
+        </article>
+      </div>
+    </section>
+  </main>
+  <script>
+    const names=['认知判断','作品项目','技艺方法','关系接触面','时代索引','意义取向'];
+    const english=['Cognition / judgment','Works / projects','Craft / methods','Relations / contact','Era / index','Meaning / orientation'];
+    const buttons=[...document.querySelectorAll('.dimension')];
+    const reader=document.getElementById('reader');
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+    let current=0;
+    function enter(index){
+      current=index;
+      buttons.forEach((button,i)=>button.setAttribute('aria-pressed',String(i===index)));
+      document.getElementById('dimension-title').replaceChildren(...[names[index].slice(0,2),names[index].slice(2)].map(text=>{const span=document.createElement('span');span.textContent=text;return span}));
+      document.getElementById('dim-english').textContent=english[index];
+      document.getElementById('reading-index').textContent=String(index+1).padStart(2,'0')+' / 06　'+names[index];
+      reader.classList.add('open');
+      reader.focus({preventScroll:true});
+      reader.scrollIntoView({behavior:reduced.matches?'instant':'smooth',block:'start'});
+    }
+    buttons.forEach((button,index)=>button.addEventListener('click',()=>enter(index)));
+    document.getElementById('next').addEventListener('click',()=>enter((current+1)%names.length));
+    document.getElementById('back').addEventListener('click',()=>{buttons[current].focus({preventScroll:true});document.querySelector('.stage').scrollIntoView({behavior:reduced.matches?'instant':'smooth',block:'start'})});
+    document.addEventListener('keydown',event=>{
+      if(event.key==='Escape'&&reader.classList.contains('open')){buttons[current].focus({preventScroll:true});document.querySelector('.stage').scrollIntoView({behavior:reduced.matches?'instant':'smooth',block:'start'});}
+      if((event.key==='ArrowLeft'||event.key==='ArrowRight')&&buttons.includes(document.activeElement)){event.preventDefault();let i=buttons.indexOf(document.activeElement);buttons[(i+(event.key==='ArrowRight'?1:5))%6].focus();}
+    });
+  </script>
+</body>
+</html>

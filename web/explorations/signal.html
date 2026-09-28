@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>ZVEN · 暗场概念</title>
+<style>
+:root{--ink:#e8e7e2;--muted:#7c817f;--line:rgba(213,223,218,.2);--accent:#d6b594;--background:#080a0a}*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--background);color:var(--ink);font-family:"Helvetica Neue",Arial,"PingFang SC","Microsoft Yahei",sans-serif}button{font:inherit;color:inherit}button:focus-visible,a:focus-visible{outline:1px solid #eee7d9;outline-offset:8px}button{cursor:pointer}body{overflow-x:hidden}.world{height:100svh;min-height:720px;position:relative;overflow:hidden;isolation:isolate}.world::after{content:"";pointer-events:none;position:absolute;inset:0;z-index:7;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.94' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' opacity='.16' filter='url(%23n)'/%3E%3C/svg%3E");opacity:.11;mix-blend-mode:screen}.sky{position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 53% 45%,#121819 0%,#080a0a 58%)}#field{width:100%;height:100%;display:block}.mast{position:absolute;top:40px;left:48px;right:48px;display:flex;align-items:flex-start;justify-content:space-between;z-index:3}.wordmark{font-size:clamp(54px,5.6vw,86px);font-weight:300;letter-spacing:-.055em;line-height:.85;margin:0}.wordmark span{display:inline-block;font-size:10px;font-weight:400;letter-spacing:.18em;vertical-align:top;margin:7px 0 0 14px;color:#aaa99f}.mast-note{font-size:10px;letter-spacing:.13em;line-height:1.9;text-align:right;color:#838b86;margin:0;max-width:150px}.mast-note b{display:block;color:#cdcfc8;font-weight:400;font-size:11px;letter-spacing:.24em;margin-bottom:3px}.cross{position:absolute;left:48px;top:48%;width:13px;height:13px;opacity:.33}.cross::before,.cross::after{content:"";position:absolute;background:#c4ccc4}.cross::before{width:13px;height:1px;top:6px}.cross::after{width:1px;height:13px;left:6px}.rim-note{position:absolute;left:48px;top:calc(48% + 34px);font-family:monospace;writing-mode:vertical-rl;font-size:9px;letter-spacing:.16em;color:#67716e}.coordinate{position:absolute;right:48px;top:49%;font-family:monospace;font-size:9px;letter-spacing:.16em;writing-mode:vertical-rl;color:#586461}.dimensions{position:absolute;inset:0;z-index:4}.dimension{position:absolute;display:flex;gap:10px;align-items:center;padding:13px 0;border:0;background:transparent;white-space:nowrap;text-align:left;transition:color .3s;color:#aeb4af;font-size:12px;letter-spacing:.09em;min-width:110px}.dimension .index{font-family:monospace;color:#566360;font-size:9px;letter-spacing:.03em;transition:color .3s}.dimension .dot{height:3px;width:3px;background:#a7b5aa;border-radius:100%;box-shadow:0 0 9px #a7b5aa44;margin-right:3px;transition:background .3s,box-shadow .3s}.dimension::after{content:"↗";opacity:0;transform:translate(-4px,3px);transition:opacity .3s,transform .3s;color:var(--accent);font-size:14px;margin-left:4px}.dimension:hover,.dimension:focus-visible{color:#fff}.dimension:hover .dot,.dimension:focus-visible .dot{background:#efdbbb;box-shadow:0 0 16px #e8cf9d}.dimension:hover .index,.dimension:focus-visible .index{color:var(--accent)}.dimension:hover::after,.dimension:focus-visible::after{opacity:1;transform:translate(0,0)}.d1{left:24%;top:24%}.d2{left:68%;top:24%}.d3{left:15%;top:45%}.d4{left:77%;top:45%}.d5{left:25%;top:67%}.d6{left:66%;top:67%}.foot{position:absolute;left:48px;right:48px;bottom:39px;display:flex;justify-content:space-between;align-items:flex-end;z-index:3;pointer-events:none}.thought{font-weight:300;font-size:clamp(30px,3.3vw,49px);letter-spacing:-.045em;line-height:1.2;margin:0}.thought em{font-style:normal;color:#7a8580}.foot-note{font-size:11px;line-height:1.95;color:#7c8881;max-width:245px;margin:0;letter-spacing:.06em}.foot-note span{display:block;color:#c0c4bb;margin-bottom:8px}.foot-note small{display:block;font-size:9px;color:#58645e;letter-spacing:.1em;margin-top:15px}.orb-caption{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#d5d7cb77;font-size:9px;letter-spacing:.32em;pointer-events:none;z-index:2;font-family:monospace;mix-blend-mode:screen}.orb-caption::before{content:"";display:block;width:19px;height:1px;background:#bbbda277;margin:0 auto 12px}dialog{border:0;padding:0;background:transparent;color:var(--ink);width:min(620px,100%);max-width:none;max-height:100%;height:100svh;margin:0 0 0 auto;overflow:auto;box-shadow:-80px 0 130px #0008}dialog::backdrop{background:#02070677;backdrop-filter:blur(3px)}.sheet{min-height:100%;padding:45px 60px 42px;background:linear-gradient(110deg,#111816f5,#090d0cfb);border-left:1px solid #4d605055;display:flex;flex-direction:column;position:relative}.sheet-top{display:flex;justify-content:space-between;align-items:center;color:#939e96;font-size:10px;letter-spacing:.18em}.close{border:0;background:transparent;padding:10px 0 10px 20px;font-size:12px;letter-spacing:.06em;color:#c1c7be}.close span{margin-left:12px;font-size:22px;vertical-align:-2px}.record{margin:auto 0;padding:74px 0}.record-label{display:flex;align-items:center;gap:12px;font-size:11px;letter-spacing:.1em;color:#8b9a8e}.record-label::before{content:"";width:25px;height:1px;background:#8b9a8e}.record h2{font-size:clamp(32px,3.1vw,46px);line-height:1.4;font-weight:300;letter-spacing:-.025em;margin:28px 0 37px;max-width:420px}.record-text{font-size:15px;line-height:2.1;color:#a5afa6;letter-spacing:.025em;max-width:420px}.record-date{display:flex;flex-wrap:wrap;gap:10px 20px;margin-top:45px;font-family:monospace;color:#7e8e82;font-size:10px;line-height:1.7;letter-spacing:.04em}.record-date span:first-child{width:100%;color:#b3bdb0}.record-bottom{border-top:1px solid #94a59433;padding-top:20px;color:#5f7063;font-size:10px;letter-spacing:.1em;display:flex;justify-content:space-between}.record-bottom b{font-weight:400;color:#b0b8ab}.sheet .record{animation:reveal .6s ease both}@keyframes reveal{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+@media(min-width:1700px){.d1{left:28%}.d2{left:65%}.d3{left:22%}.d4{left:71%}.d5{left:28%}.d6{left:65%}}
+@media(max-width:760px){.world{min-height:740px}.mast{top:31px;left:23px;right:23px}.wordmark{font-size:56px}.wordmark span{font-size:8px;margin:5px 0 0 10px}.mast-note{font-size:8px;max-width:110px}.mast-note b{font-size:9px;letter-spacing:.1em;margin-bottom:4px}.cross,.rim-note,.coordinate{display:none}.dimension{font-size:10px;letter-spacing:.03em;gap:7px;padding:14px 0;min-width:100px;text-shadow:0 1px 15px #000,0 1px 4px #000}.dimension .index{font-size:8px}.dimension .dot{margin-right:0}.dimension::after{display:none}.d1{left:24px;top:26%}.d2{left:auto;right:22px;top:26%}.d3{left:24px;top:44%}.d4{left:auto;right:22px;top:44%}.d5{left:24px;top:62%}.d6{left:auto;right:22px;top:62%}.foot{bottom:27px;left:24px;right:24px;display:block}.thought{font-size:35px;letter-spacing:-.055em}.foot-note{font-size:10px;line-height:1.8;max-width:none;margin-top:18px}.foot-note span{display:none}.foot-note small{margin-top:9px;font-size:8px}.orb-caption{top:45.8%;font-size:8px;letter-spacing:.2em}.sheet{padding:28px 29px 27px}.sheet-top{font-size:9px}.record{padding:54px 0}.record h2{font-size:35px;margin-top:29px;margin-bottom:29px}.record-text{font-size:14px;line-height:2.2}.record-date{margin-top:34px}dialog::backdrop{backdrop-filter:blur(1px)}.close{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<main class="world">
+<div class="sky" aria-hidden="true"><canvas id="field"></canvas></div>
+<header class="mast"><h1 class="wordmark">ZVEN<span>∞</span></h1><p class="mast-note"><b>一个人的持续档案</b>始终处于发生之中</p></header>
+<div class="cross" aria-hidden="true"></div><span class="rim-note" aria-hidden="true">A LIFE IN OBSERVATION</span><span class="coordinate" aria-hidden="true">FORM / MEMORY / POSSIBILITY</span>
+<nav class="dimensions" aria-label="从六个维度阅读">
+<button class="dimension d1" data-dimension="认知判断"><span class="index" aria-hidden="true">01</span><span class="dot" aria-hidden="true"></span>认知判断</button>
+<button class="dimension d2" data-dimension="作品项目"><span class="index" aria-hidden="true">02</span><span class="dot" aria-hidden="true"></span>作品项目</button>
+<button class="dimension d3" data-dimension="技艺方法"><span class="index" aria-hidden="true">03</span><span class="dot" aria-hidden="true"></span>技艺方法</button>
+<button class="dimension d4" data-dimension="关系接触面"><span class="index" aria-hidden="true">04</span><span class="dot" aria-hidden="true"></span>关系接触面</button>
+<button class="dimension d5" data-dimension="时代索引"><span class="index" aria-hidden="true">05</span><span class="dot" aria-hidden="true"></span>时代索引</button>
+<button class="dimension d6" data-dimension="意义取向"><span class="index" aria-hidden="true">06</span><span class="dot" aria-hidden="true"></span>意义取向</button>
+</nav>
+<div class="orb-caption" aria-hidden="true">IN CONTINUUM</div>
+<footer class="foot"><p class="thought">从一个切面<em>进入。</em></p><p class="foot-note"><span>六个维度，同一个人的记录。</span>沿着判断与作品，<br>重新检查每一次取舍的上下文。<small>视觉概念 / 示例材料</small></p></footer>
+</main>
+<dialog id="reader" aria-labelledby="record-title"><article class="sheet"><div class="sheet-top"><span>ZVEN / 阅读切面</span><button class="close" aria-label="关闭记录">关闭阅读<span aria-hidden="true">×</span></button></div><div class="record"><div class="record-label" id="dimension-label">认知判断</div><h2 id="record-title">先留下依据，<br>再写结论</h2><p class="record-text">Zven 给示例项目的一次取舍留下两段材料：一段支持继续，一段支持暂停。结论仍是继续；与上一版相比，多出的是可以重新检查的理由。</p><div class="record-date"><span>现场</span><span>事件 <time datetime="2026-09-18">2026-09-18</time></span><span>档案 <time datetime="2026-09-28">2026-09-28</time></span></div></div><div class="record-bottom"><span>示例材料</span><b>同一记录，不同切面</b></div></article></dialog>
+<script>
+(()=>{
+ const dialog=document.getElementById('reader'), label=document.getElementById('dimension-label');
+ document.querySelectorAll('[data-dimension]').forEach(button=>button.addEventListener('click',()=>{label.textContent=button.dataset.dimension;dialog.showModal()}));
+ document.querySelector('.close').addEventListener('click',()=>dialog.close());
+ dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});
+ const canvas=document.getElementById('field'),ctx=canvas.getContext('2d');
+ if(!ctx)return;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');let w=0,h=0,dpr=1,frame=0,last=0,phase=0;
+ function resize(){w=canvas.clientWidth;h=canvas.clientHeight;dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);draw(phase)}
+ function point(u,v,rotation){
+ const c=Math.cos(v),upper=v>.08;
+ // The shell slips across one cut; its two halves retain the same contour history.
+ const radius=c*(1+.13*Math.sin(u*2+.7)*c*c),shift=.105*Math.tanh((v-.08)*5)+.06*Math.sin(v*3);
+ const x=Math.cos(u)*radius+shift+(upper?.052:-.028),y=Math.sin(v)+(upper?.036:-.036),z=Math.sin(u)*radius+.065*Math.sin(v*3);
+ const a=x*Math.cos(rotation)+z*Math.sin(rotation),b=-x*Math.sin(rotation)+z*Math.cos(rotation);
+ const tilt=.29,yy=y*Math.cos(tilt)-b*Math.sin(tilt),zz=y*Math.sin(tilt)+b*Math.cos(tilt),q=1/(1-zz*.1);
+ const angle=-.34,px=a*q,py=yy*q;
+ return [px*Math.cos(angle)-py*Math.sin(angle),px*Math.sin(angle)+py*Math.cos(angle),zz];
+ }
+ function draw(t){ctx.clearRect(0,0,w,h);const mobile=w<761,cx=w*.5,cy=h*(mobile?.458:.462),r=Math.min(w*(mobile?.61:.273),h*(mobile?.292:.355));
+ const glow=ctx.createRadialGradient(cx-r*.14,cy-r*.12,r*.08,cx,cy,r*1.32);glow.addColorStop(0,'rgba(89,118,119,.034)');glow.addColorStop(.64,'rgba(59,102,98,.048)');glow.addColorStop(.83,'rgba(147,167,153,.023)');glow.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=glow;ctx.fillRect(0,0,w,h);
+ const rotation=.42+t*.035;
+ // Irregular layers reveal the volume; a missing band opens a displaced diagonal fracture.
+ for(let j=1;j<118;j++){
+ const v=-Math.PI/2+j*Math.PI/118;if(v>.023&&v<.135)continue;
+ for(let side=0;side<2;side++){ctx.beginPath();let begun=false;
+ for(let k=0;k<=174;k++){const u=k*Math.PI*2/174,p=point(u,v,rotation),front=p[2]>0;if(front!==(side===1)){begun=false;continue}const xx=cx+p[0]*r,yy=cy+p[1]*r;if(!begun){ctx.moveTo(xx,yy);begun=true}else ctx.lineTo(xx,yy)}
+ const light=Math.pow(Math.cos(v),.55),nearCut=Math.exp(-Math.pow((v-.08)/.26,2)),a=(side?.32+nearCut*.15:.045)*light;
+ ctx.strokeStyle=`rgba(191,215,203,${a})`;ctx.lineWidth=side?.76:.55;ctx.stroke();
+ }}
+ // Only the exposed lips receive warm light. They are part of the form, not an orbit.
+ [.023,.135].forEach((v,lip)=>{for(let side=0;side<2;side++){
+ ctx.beginPath();let begun=false;
+ for(let k=0;k<=220;k++){const p=point(k*Math.PI*2/220,v,rotation);if((p[2]>0)!==(side===1)){begun=false;continue}const xx=cx+p[0]*r,yy=cy+p[1]*r;if(!begun){ctx.moveTo(xx,yy);begun=true}else ctx.lineTo(xx,yy)}
+ ctx.strokeStyle=side?`rgba(232,215,176,${lip?.75:.52})`:'rgba(206,205,176,.13)';ctx.lineWidth=side?(lip?1.1:.8):.65;ctx.shadowColor='rgba(214,220,180,.17)';ctx.shadowBlur=side?5:0;ctx.stroke();ctx.shadowBlur=0;
+ }});
+
+ }
+ function animate(time){if(time-last>40){phase=time*.001;draw(phase);last=time}frame=requestAnimationFrame(animate)}
+ function sync(){cancelAnimationFrame(frame);if(reduced.matches||document.hidden)draw(phase);else frame=requestAnimationFrame(animate)}
+ new ResizeObserver(resize).observe(canvas);reduced.addEventListener('change',sync);document.addEventListener('visibilitychange',sync);resize();sync();
+})();
+</script>
+</body>
+</html>
